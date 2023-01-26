@@ -1,24 +1,22 @@
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import Sidebar from "./components/Sidebar";
-import LetterMain from "./pages/LetterMain";
 import { createTheme, ThemeProvider } from "@mui/material";
+import LandingPage from "./pages/LandingPage";
+import Header from "./components/Header";
 
 const theme = createTheme();
 
 const useStyles = makeStyles({
-  root: {},
+  root: { display: "flex" },
 });
 function App() {
   const classes = useStyles();
   return (
-    <ThemeProvider theme={theme}>
-      <Grid className={classes.root}>
-        <Sidebar />
-        <LetterMain></LetterMain>
-      </Grid>
-    </ThemeProvider>
+    <>
+      <Header />
+      <LandingPage />
+    </>
   );
 }
 

@@ -1,10 +1,14 @@
-import { Grid, List, ListItem, ListItemText } from "@mui/material";
+import { Button, Grid, List, ListItem, ListItemText } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   sidebar: {
-    backgroundColor: "yellow",
-    width: 160,
+    backgroundColor: "#1976d2",
+    height: "100vh",
+    position: "fixed",
+    width: 150,
+    borderRight: "1px solid #e9ecef",
   },
+  button: { height: 50, width: "100%" },
 });
 
 const listItems = [
@@ -25,6 +29,7 @@ function Sidebar() {
   const classes = useStyles();
   return (
     <Grid className={classes.sidebar}>
+      <Button className={classes.button}>올림</Button>
       <List>
         {listItems.map((listItem, index) => (
           <ListItem button key={index}>
