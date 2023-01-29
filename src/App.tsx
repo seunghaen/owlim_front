@@ -1,22 +1,27 @@
-import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React from "react";
-import { createTheme, ThemeProvider } from "@mui/material";
-import LandingPage from "./pages/LandingPage";
+import { Box, Button, createTheme, ThemeProvider } from "@mui/material";
 import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import { blue, grey } from "@mui/material/colors";
+import "./App.css";
 
-const theme = createTheme();
-
-const useStyles = makeStyles({
-  root: { display: "flex" },
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: grey[100],
+    },
+  },
+  typography: {
+    fontFamily: ["Spoqa Han Sans Neo"].join(","),
+  },
 });
+
 function App() {
-  const classes = useStyles();
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Header />
-      <LandingPage />
-    </>
+      <Sidebar />
+    </ThemeProvider>
   );
 }
 

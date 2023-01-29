@@ -1,43 +1,48 @@
-import { Button, Grid, List, ListItem, ListItemText } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-const useStyles = makeStyles({
-  sidebar: {
-    backgroundColor: "#1976d2",
-    height: "100vh",
-    position: "fixed",
-    width: 150,
-    borderRight: "1px solid #e9ecef",
-  },
-  button: { height: 50, width: "100%" },
-});
+import { Box, List, ListItem, Typography } from "@mui/material";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 
 const listItems = [
   {
     listText: "뉴스레터 리스트",
+    icon: "email",
   },
   {
     listText: "구독 목록",
-  },
-  {
-    listText: "Portfolio",
-  },
-  {
-    listText: "Contacts",
+    icon: "list",
   },
 ];
 function Sidebar() {
-  const classes = useStyles();
+  function iconMaker(icon: string) {
+    const size = { fontSize: "smaill", pr: "10px" };
+    switch (icon) {
+      case "email":
+        return <EmailOutlinedIcon sx={size} />;
+      case "list":
+        return <ListOutlinedIcon sx={size} />;
+    }
+  }
   return (
-    <Grid className={classes.sidebar}>
-      <Button className={classes.button}>올림</Button>
-      <List>
+    <Box
+      sx={{ top: "64px", left: "0px", height: "100vh", width: "200px" }}
+      position="fixed"
+      bgcolor="primary.main"
+    >
+      <List sx={{ mt: "80px" }}>
         {listItems.map((listItem, index) => (
-          <ListItem button key={index}>
-            <ListItemText primary={listItem.listText} />
+          <ListItem
+            sx={{ mt: "10px", ml: "10px", width: "180px" }}
+            button
+            key={index}
+          >
+            {iconMaker(listItem.icon)}
+            <Typography variant="body2" fontWeight="fontWeightMedium">
+              {listItem.listText}
+            </Typography>
           </ListItem>
         ))}
       </List>
-    </Grid>
+    </Box>
   );
 }
 
