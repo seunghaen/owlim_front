@@ -1,9 +1,9 @@
-import { makeStyles } from "@mui/styles";
-import { Box, Button, createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import { blue, grey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import "./App.css";
+import LandingPage from "./pages/LandingPage";
 
 const theme = createTheme({
   palette: {
@@ -21,6 +21,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Header />
       <Sidebar />
+      <LandingPage />
     </ThemeProvider>
   );
 }
