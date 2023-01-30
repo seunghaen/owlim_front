@@ -2,38 +2,57 @@ import { Box, List, ListItem, Typography } from "@mui/material";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import { useNavigate } from "react-router-dom";
 
 type ListItem = {
   listText: string;
-  icon: string;
+  title: string;
 };
 
 const listItems: ListItem[] = [
   {
     listText: "뉴스레터 리스트",
-    icon: "email",
+    title: "email",
   },
   {
     listText: "구독 목록",
-    icon: "list",
+    title: "subscribe",
   },
   {
     listText: "설정",
-    icon: "setting",
+    title: "setting",
   },
 ];
 function Sidebar() {
-  function iconMaker(icon: string) {
+  const navigate = useNavigate();
+
+  function iconMaker(title: string) {
     const iconSize = { fontSize: "smaill", pr: "10px" };
-    switch (icon) {
+    switch (title) {
       case "email":
-        return <EmailOutlinedIcon sx={iconSize} />;
-      case "list":
-        return <ListOutlinedIcon sx={iconSize} />;
+        return {
+          icon: <EmailOutlinedIcon sx={iconSize} />,
+          navi: () => {
+            navigate("/");
+          },
+        };
+      case "subscribe":
+        return {
+          icon: <ListOutlinedIcon sx={iconSize} />,
+          navi: () => {
+            navigate("subscribe");
+          },
+        };
       case "setting":
-        return <SettingsOutlinedIcon sx={iconSize} />;
+        return {
+          icon: <SettingsOutlinedIcon sx={iconSize} />,
+          navi: () => {
+            navigate("setting");
+          },
+        };
     }
   }
+
   return (
     <Box
       sx={{ top: "60px", left: "0px", height: "100vh", width: "200px" }}
@@ -46,8 +65,9 @@ function Sidebar() {
             sx={{ mt: "10px", ml: "10px", width: "180px" }}
             button
             key={index}
+            onClick={iconMaker(listItem.title)?.navi}
           >
-            {iconMaker(listItem.icon)}
+            {iconMaker(listItem.title)?.icon}
             <Typography variant="body2" fontWeight="fontWeightMedium">
               {listItem.listText}
             </Typography>

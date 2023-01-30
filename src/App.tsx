@@ -3,7 +3,40 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { grey } from "@mui/material/colors";
 import "./App.css";
-import LandingPage from "./pages/LandingPage";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Main from "./pages/Main";
+import Subscribe from "./pages/Subscribe";
+import Setting from "./pages/Setting";
+
+const AppLayout = () => {
+  return (
+    <>
+      <Header />
+      <Sidebar />
+      <Outlet />
+    </>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Main />,
+      },
+      {
+        path: "subscribe",
+        element: <Subscribe />,
+      },
+      {
+        path: "setting",
+        element: <Setting />,
+      },
+    ],
+  },
+]);
 
 const theme = createTheme({
   palette: {
@@ -19,9 +52,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <Sidebar />
-      <LandingPage />
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }

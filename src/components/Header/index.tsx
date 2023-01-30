@@ -6,17 +6,17 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import {
   Avatar,
   Box,
+  Button,
   Menu,
   MenuItem,
   Tooltip,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
-  const clickHander = () => {
-    return;
-  };
+  const navigate = useNavigate();
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -37,16 +37,16 @@ function Header() {
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          fontWeight="fontWeightMedium"
-          onClick={clickHander}
-          component="a"
-          href="/"
-          variant="h6"
-          sx={{ textDecoration: "none", color: "inherit" }}
-        >
-          올 림
-        </Typography>
+        <Button color="inherit">
+          <Typography
+            fontWeight="fontWeightMedium"
+            variant="h6"
+            sx={{ textDecoration: "none", color: "inherit" }}
+            onClick={() => navigate("/")}
+          >
+            올 림
+          </Typography>
+        </Button>
         <Box sx={{ flexGrow: 1 }}></Box>
         <Box sx={{ flexGrow: 0 }}>
           <Box>
