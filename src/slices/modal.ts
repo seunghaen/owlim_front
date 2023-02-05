@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 type Modaltype = "search" | "setting" | null;
 
 interface Modal {
-  open: boolean;
+  isOpen: boolean;
   type: Modaltype;
 }
 const initialState: Modal = {
-  open: false,
+  isOpen: false,
   type: null,
 };
 const modalSlice = createSlice({
@@ -15,11 +15,11 @@ const modalSlice = createSlice({
   initialState: initialState,
   reducers: {
     modalOpen: (state, action) => {
-      state.open = true;
+      state.isOpen = true;
       state.type = action.payload;
     },
-    modalClose: (state, action) => {
-      state.open = false;
+    modalClose: (state) => {
+      state.isOpen = false;
       state.type = null;
     },
   },
