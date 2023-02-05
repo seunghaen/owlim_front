@@ -25,15 +25,15 @@ const router = createBrowserRouter([
         element: <Main />,
       },
       {
-        path: "subscribe",
+        path: "/subscribe",
         element: <Subscribe />,
       },
       {
-        path: "setting",
+        path: "/setting",
         element: <Setting />,
       },
       {
-        path: "search",
+        path: "/search",
         element: <SearchPage />,
       },
     ],
