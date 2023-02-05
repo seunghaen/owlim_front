@@ -1,9 +1,8 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 import PageGrid from "../../UI/PageGrid";
 import letterList, { LetterType } from "./letterList";
 import LetterCard from "../../UI/LetterCard";
-import SearchIcon from "@mui/icons-material/Search";
 
 function Main() {
   const [value, setValue] = useState<LetterType["type"]>(null);
@@ -32,7 +31,7 @@ function Main() {
       </Box>
       {letterList.map((item, index) =>
         value ? (
-          item.type == value && <LetterCard item={item} key={index} />
+          item.type === value && <LetterCard item={item} key={index} />
         ) : (
           <LetterCard item={item} key={index} />
         )

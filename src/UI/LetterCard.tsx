@@ -15,8 +15,8 @@ export default function LetterCard({ item }: CardProp) {
   return (
     <Card
       sx={{
-        maxWidth: 300,
-        minWidth: 300,
+        maxWidth: 250,
+        minWidth: 250,
         margin: "15px",
         borderColor: "black",
       }}

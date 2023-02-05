@@ -2,14 +2,15 @@ import { Box, List, ListItem, Typography } from "@mui/material";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useNavigate } from "react-router-dom";
 
-type ListItem = {
+type MenuItem = {
   listText: string;
   title: string;
 };
 
-const listItems: ListItem[] = [
+const listItems: MenuItem[] = [
   {
     listText: "뉴스레터 리스트",
     title: "email",
@@ -17,6 +18,10 @@ const listItems: ListItem[] = [
   {
     listText: "구독 목록",
     title: "subscribe",
+  },
+  {
+    listText: "검색",
+    title: "search",
   },
   {
     listText: "설정",
@@ -41,6 +46,13 @@ function Sidebar() {
           icon: <ListOutlinedIcon sx={iconSize} />,
           navi: () => {
             navigate("subscribe");
+          },
+        };
+      case "search":
+        return {
+          icon: <SearchOutlinedIcon sx={iconSize} />,
+          navi: () => {
+            navigate("search");
           },
         };
       case "setting":
