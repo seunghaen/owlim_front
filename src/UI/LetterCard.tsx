@@ -7,16 +7,27 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { LetterType } from "../pages/Main/letterList";
 
-export default function LetterCard(props: LetterType) {
+type CardProp = {
+  item: LetterType;
+};
+
+export default function LetterCard({ item }: CardProp) {
   return (
-    <Card sx={{ maxWidth: 300 }}>
-      <CardMedia sx={{ height: 100 }} image={props.img} title={props.title} />
+    <Card
+      sx={{
+        maxWidth: 300,
+        minWidth: 300,
+        margin: "15px",
+        borderColor: "black",
+      }}
+    >
+      <CardMedia sx={{ height: 100 }} image={item.img} title={item.title} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.title}
+          {item.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.sub}
+          {item.sub}
         </Typography>
       </CardContent>
       <CardActions>

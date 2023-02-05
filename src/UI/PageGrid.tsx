@@ -11,7 +11,7 @@ function PageGrid({ children }: PageGridProp) {
       sx={{
         top: "59px",
         left: "195px",
-        width: "100%",
+        width: `calc(100% - 190px)`,
         height: "100vh",
         overflow: "auto",
         borderRadius: 5,
@@ -19,7 +19,17 @@ function PageGrid({ children }: PageGridProp) {
       }}
       bgcolor="white"
     >
-      <Box sx={{ pt: "10px", pl: "10px" }}>{children}</Box>
+      <Box
+        sx={{
+          // width: `calc(100vw-200px)`,
+          pt: "10px",
+          pl: "30px",
+          display: "flex",
+          flexWrap: "wrap",
+        }}
+      >
+        {children}
+      </Box>
     </Box>
   );
 }

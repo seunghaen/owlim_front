@@ -1,23 +1,42 @@
-import { Typography } from "@mui/material";
-import React from "react";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
+import React, { useState } from "react";
 import PageGrid from "../../UI/PageGrid";
-import letterList from "./letterList";
+import letterList, { LetterType } from "./letterList";
 import LetterCard from "../../UI/LetterCard";
-import { title } from "process";
+import SearchIcon from "@mui/icons-material/Search";
 
 function Main() {
+  const [value, setValue] = useState<LetterType["type"]>(null);
+  const handleChange = (
+    event: React.SyntheticEvent,
+    newValue: LetterType["type"]
+  ) => {
+    setValue(newValue);
+  };
   return (
     <PageGrid>
-      {letterList.map((item, index) => (
-        <LetterCard
-          title={item.title}
-          id={item.id}
-          sub={item.sub}
-          img={item.img}
-          key={item.id}
-        />
-      ))}
-      <Typography variant="h1">Main Page</Typography>
+      <Box bgcolor="white" sx={{ width: "90%", my: "20px" }}>
+        <Tabs
+          value={value}
+          variant="fullWidth"
+          centered
+          onChange={handleChange}
+          aria-label="wrapped label tabs example"
+          textColor="secondary"
+        >
+          <Tab value={null} label="전체" />
+          <Tab value="경제" label="경제" />
+          <Tab value="시사" label="시사" />
+          <Tab value="취미" label="취미" />
+        </Tabs>
+      </Box>
+      {letterList.map((item, index) =>
+        value ? (
+          item.type == value && <LetterCard item={item} key={index} />
+        ) : (
+          <LetterCard item={item} key={index} />
+        )
+      )}
     </PageGrid>
   );
 }
