@@ -5,10 +5,12 @@ import Main from "../pages/Main";
 import Setting from "../pages/Setting";
 import Subscribe from "../pages/Subscribe";
 import SearchPage from "../pages/SearchPage";
+import BaseModal from "../modals/BaseModal";
 
 const AppLayout = () => {
   return (
     <>
+      <BaseModal />
       <Header />
       <Sidebar />
       <Outlet />

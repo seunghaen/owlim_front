@@ -1,9 +1,4 @@
-import { Box, List, ListItem, Typography } from "@mui/material";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Box, List } from "@mui/material";
 import SidebarItem, { SidebarMenuItem } from "./SidebarItem";
 
 const listItems: SidebarMenuItem[] = [
@@ -14,10 +9,6 @@ const listItems: SidebarMenuItem[] = [
   {
     listText: "구독 목록",
     path: "/subscribe",
-  },
-  {
-    listText: "검색",
-    path: "/search",
   },
   {
     listText: "설정",

@@ -1,42 +1,29 @@
 import { Box, InputAdornment, TextField } from "@mui/material";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useAppDispatch } from "../../store";
-import searchSlice from "../../slices/search";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import modalSlice from "../../slices/modal";
 
 function SearchField() {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [text, setText] = useState<string | null>(null);
 
-  const searchHander: React.FormEventHandler = (event) => {
-    event.preventDefault();
-    dispatch(searchSlice.actions.searchSubmit(text));
-    navigate("search");
-    setText("");
-  };
-  const textHandler: React.ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (event) => {
-    setText(event.target.value);
+  const clickHandler = () => {
+    dispatch(modalSlice.actions.modalOpen("search"));
   };
 
   return (
     <Box
-      component="form"
-      onSubmit={searchHander}
       sx={{
         pr: "5%",
         "& > :not(style)": { m: 1 },
       }}
     >
       <TextField
-        value={text}
-        onChange={textHandler}
+        type="button"
+        onClick={clickHandler}
         color="secondary"
         label="Search"
         variant="outlined"
+        sx={{ width: "150px" }}
         size="small"
         InputProps={{
           startAdornment: (

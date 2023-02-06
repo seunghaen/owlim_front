@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type Modaltype = "search" | "setting" | null;
+export type ModalType = "search" | "setting" | null;
 
-interface Modal {
+interface ModalState {
   isOpen: boolean;
-  type: Modaltype;
+  type: ModalType;
 }
-const initialState: Modal = {
+const initialState: ModalState = {
   isOpen: false,
   type: null,
 };
