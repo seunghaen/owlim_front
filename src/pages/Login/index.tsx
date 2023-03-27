@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { sample } from "../../api";
+import { googleLogin, sample } from "../../api";
 import PageGrid from "../../UI/PageGrid";
 
 function LoginPage() {
@@ -17,10 +17,10 @@ function LoginPage() {
         <button onSubmit={onLogin}>로그인</button>
         <button
           onClick={() => {
-            sample();
+            googleLogin();
           }}
         >
-          회원가입
+          구글로그인
         </button>
       </form>
     </PageGrid>

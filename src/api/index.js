@@ -43,3 +43,7 @@ export const deleteEmail = (token, id) =>
 export const sample = () => {
   axios.get(`${url}/sample`);
 };
+
+export const googleLogin = () => {
+  axios.get(`${url}/auth/google`);
+};
