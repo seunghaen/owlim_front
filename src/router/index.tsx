@@ -6,6 +6,7 @@ import Setting from "../pages/Setting";
 import Subscribe from "../pages/Subscribe";
 import SearchPage from "../pages/SearchPage";
 import BaseModal from "../modals/BaseModal";
+import Login from "../pages/Login";
 
 const AppLayout = () => {
   return (
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Main />,
+        element: <Login />,
       },
       {
         path: "/subscribe",
