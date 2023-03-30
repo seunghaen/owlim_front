@@ -9,38 +9,71 @@ import ProfileMenu from "./ProfileMenu";
 import Notification from "./Notification";
 import SearchField from "./SearchField";
 
-function Header() {
+type HeaderProp = {
+  loggedin: Boolean;
+};
+
+function ForLoggedinUser() {
+  return (
+    <>
+      <SearchField />
+      <Box sx={{ flexGrow: 0 }}>
+        <Box>
+          <Notification />
+          <ProfileMenu />
+        </Box>
+      </Box>
+    </>
+  );
+}
+
+function ForLoggedoutUser() {
   const navigate = useNavigate();
+  return (
+    <>
+      <Button
+        onClick={() => {
+          navigate("/login");
+        }}
+      >
+        로그인하기
+      </Button>
+    </>
+  );
+}
+
+function Header(props: HeaderProp) {
+  const navigate = useNavigate();
+  const titleClickHandler = () => {
+    const path = props.loggedin ? "/main" : "/";
+    navigate(path);
+  };
   return (
     <AppBar position="fixed" sx={{ height: 64, boxShadow: "none" }}>
       <Toolbar sx={{}}>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
+        {props.loggedin && (
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
         <Button color="inherit">
           <Typography
             fontWeight="fontWeightMedium"
             variant="h6"
             sx={{ textDecoration: "none", color: "inherit" }}
-            onClick={() => navigate("/")}
+            onClick={titleClickHandler}
           >
             올 림
           </Typography>
         </Button>
         <Box sx={{ flexGrow: 1 }}></Box>
-        <SearchField />
-        <Box sx={{ flexGrow: 0 }}>
-          <Box>
-            <Notification />
-            <ProfileMenu />
-          </Box>
-        </Box>
+        {props.loggedin ? <ForLoggedinUser /> : <ForLoggedoutUser />}
       </Toolbar>
     </AppBar>
   );

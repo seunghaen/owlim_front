@@ -4,15 +4,15 @@ import SidebarItem, { SidebarMenuItem } from "./SidebarItem";
 const listItems: SidebarMenuItem[] = [
   {
     listText: "뉴스레터 리스트",
-    path: "/",
+    path: "/main",
   },
   {
     listText: "구독 목록",
-    path: "/subscribe",
+    path: "/main/subscribe",
   },
   {
     listText: "설정",
-    path: "/setting",
+    path: "/main/setting",
   },
 ];
 function Sidebar() {
