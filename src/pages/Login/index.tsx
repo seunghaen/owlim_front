@@ -12,7 +12,7 @@ function LoginPage() {
   };
 
   const googleLoginHandler = () => {
-    window.open("http://localhost:8001/api/auth/google", "_self");
+    window.open("http://localhost:8001/auth/google", "_self");
   };
   return (
     <PageGrid>
@@ -24,7 +24,7 @@ function LoginPage() {
       <button onClick={googleLoginHandler}>구글 로그인 버튼</button>
       <button
         onClick={() => {
-          axios.get("/api/sample");
+          axios.get("/sample");
         }}
       >
         샘플

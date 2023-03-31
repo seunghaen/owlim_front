@@ -2,10 +2,12 @@ import { combineReducers } from "redux";
 import modalSlice from "../slices/modal";
 
 import searchSlice from "../slices/search";
+import userSlice from "../slices/user";
 
 const rootReducer = combineReducers({
   search: searchSlice.reducer,
   modal: modalSlice.reducer,
+  user: userSlice.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

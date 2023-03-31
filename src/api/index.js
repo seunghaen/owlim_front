@@ -41,9 +41,9 @@ export const deleteEmail = (token, id) =>
 
 //
 export const sample = () => {
-  axios.get(`/api/sample`);
+  axios.get(`/sample`);
 };
 
 export const googleLogin = () => {
-  axios.get(`/api/auth/google`);
+  axios.get(`/auth/google`);
 };

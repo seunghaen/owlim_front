@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import PageGrid from "../../UI/PageGrid";
 import letterList, { LetterType } from "./letterList";
 import LetterCard from "../../UI/LetterCard";
+import axios from "axios";
 
 function Main() {
   const [value, setValue] = useState<LetterType["type"]>(null);
@@ -36,6 +37,13 @@ function Main() {
           <LetterCard item={item} key={index} />
         )
       )}
+      <button
+        onClick={() => {
+          axios.get("api/sample");
+        }}
+      >
+        test
+      </button>
     </PageGrid>
   );
 }
