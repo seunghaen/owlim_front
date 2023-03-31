@@ -6,6 +6,7 @@ import Main from "../pages/Main";
 import SearchPage from "../pages/SearchPage";
 import Setting from "../pages/Setting";
 import Subscribe from "../pages/Subscribe";
+import { IsLoggedin } from "./hoc";
 
 const MainLayout = () => {
   return (
@@ -13,7 +14,7 @@ const MainLayout = () => {
       <BaseModal />
       <Header loggedin={true} />
       <Sidebar />
-      <Outlet />
+      <IsLoggedin component={<Outlet />} />
     </>
   );
 };
