@@ -18,10 +18,10 @@ function Introduction() {
       >
         뉴스레터 관리 플랫폼 올림에 오신것을 환영합니다.
       </Typography>
-      <Typography>해당 서비스는 Gmail만 지원합니다.</Typography>
       <Typography>
-        다른 메일 서비스는 빠른 시일내로 업데이트 될 예정입니다.
+        해당 서비스는 뉴스레터를 효과적으로 관리하기 위한 프로그램입니다.
       </Typography>
+      <Typography>Gmail 연동 등의 서비스는 업데이트 될 예정입니다.</Typography>
     </Box>
   );
 }

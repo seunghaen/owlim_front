@@ -1,86 +1,72 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const passwordRegEx = /^[A-Za-z0-9]{8,20}$/;
+import { loginboxFieldsxProp } from "../Signup/style";
 
-function Login() {
-  const [username, setUsername] = useState("");
+function LoginForm() {
+  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
+  const passwordRegEx = /^[A-Za-z0-9]{8,20}$/;
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-
-    // Perform authentication here
-    if (username === "example" && password === "password!123") {
-      setLoggedIn(true);
-    } else {
-      setPasswordError("Incorrect username or password");
-    }
-  };
-
-  const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event
-  ) => {
-    setPassword(event.target.value);
-
-    if (
-      event.target.value.length < 9 ||
-      event.target.value.match(passwordRegEx) === null
-    ) {
-      setPasswordError(
-        "Password must be at least 9 characters long and contain an exclamation mark."
-      );
+    if (password.length < 8 || !password.match(passwordRegEx) === null) {
+      setPasswordError("비밀번호 규칙을 확인하세요.");
     } else {
       setPasswordError("");
+      //여기 로그인 axios 로직 넣기
     }
   };
 
-  const isSubmitDisabled = !(username && password && !passwordError);
-
-  if (loggedIn) {
-    return <div>You are logged in!</div>;
-  }
+  const isSubmitDisabled = !(userId && password && !passwordError);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Box component="form" onSubmit={handleSubmit}>
       <Box>
-        <label htmlFor="username">
-          <Typography>ID</Typography>
-        </label>
-        <input
+        <TextField
           type="text"
-          id="username"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
+          id="userId"
+          label="아이디"
+          required
+          color="secondary"
+          value={userId}
+          sx={loginboxFieldsxProp}
+          onChange={(event) => setUserId(event.target.value)}
         />
       </Box>
       <Box>
-        <label htmlFor="password">
-          <Typography>password</Typography>
-        </label>
-        <input
+        <TextField
           type="password"
           id="password"
+          label="비밀번호"
+          color="secondary"
+          required
           value={password}
-          onChange={handlePasswordChange}
+          sx={loginboxFieldsxProp}
+          onChange={(event) => setPassword(event.target.value)}
         />
       </Box>
-      {passwordError && <div style={{ color: "red" }}>{passwordError}</div>}
-      <Button color="primary" type="submit" disabled={isSubmitDisabled}>
-        Log In
+      {passwordError && (
+        <Box style={{ color: "red" }}>
+          <Typography>{passwordError}</Typography>
+        </Box>
+      )}
+      <Button color="secondary" type="submit" disabled={isSubmitDisabled}>
+        로그인
       </Button>
       <Button
+        color="secondary"
         onClick={() => {
           navigate("/signup");
         }}
       >
-        Sign Up
+        회원가입
       </Button>
-    </form>
+    </Box>
   );
 }
 
-export default Login;
+export default LoginForm;
