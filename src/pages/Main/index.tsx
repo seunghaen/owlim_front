@@ -39,7 +39,7 @@ function Main() {
       )}
       <button
         onClick={() => {
-          axios.get("api/sample");
+          axios.get("/sample");
         }}
       >
         test
