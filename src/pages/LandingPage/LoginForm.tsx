@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../api";
 import { loginboxFieldsxProp } from "../Signup/style";
 
 function LoginForm() {
@@ -17,7 +18,15 @@ function LoginForm() {
       setPasswordError("비밀번호 규칙을 확인하세요.");
     } else {
       setPasswordError("");
-      //여기 로그인 axios 로직 넣기
+      const form = {
+        loginId: userId,
+        password,
+      };
+      login(form).then((res) => {
+        if (res.data.code === 200) {
+          navigate("/");
+        }
+      });
     }
   };
 

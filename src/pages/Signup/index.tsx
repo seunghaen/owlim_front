@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { join } from "../../api";
 import LandingPageGrid from "../../UI/LandingPageGrid";
 import { loginboxFieldsxProp } from "./style";
 
@@ -22,7 +23,17 @@ function SignUp() {
       setPasswordError("비밀번호 규칙을 확인하세요.");
     } else {
       setPasswordError("");
-      //여기 회원가입 axios 로직 넣기
+      const form = {
+        nick: username,
+        password,
+        loginId: userId,
+      };
+      console.log(form);
+      join(form).then((res) => {
+        if (res.data.code === 200) {
+          navigate("/");
+        }
+      });
     }
   };
 

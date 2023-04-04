@@ -9,8 +9,9 @@ const headers = (token) => ({
 });
 
 // account routes
-export const register = (form) => axios.post(`${url}/auth/register`, form);
+export const join = (form) => axios.post(`${url}/auth/join`, form);
 export const login = (form) => axios.post(`${url}/auth/login`, form);
+export const logout = () => axios.get(`${url}/auth/logout`);
 export const getUser = (token) => axios.get(`${url}/auth`, headers(token));
 export const uploadImage = (token, image) =>
   axios.put(`${url}/account/image`, image, headers(token));
