@@ -8,7 +8,7 @@ import { loginboxFieldsxProp } from "./style";
 function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useState("");
+  const [loginId, setLoginId] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function SignUp() {
       const form = {
         nick: username,
         password,
-        loginId: userId,
+        loginId: loginId,
       };
       console.log(form);
       join(form).then((res) => {
@@ -38,7 +38,7 @@ function SignUp() {
   };
 
   const isSubmitDisabled = !(
-    userId &&
+    loginId &&
     username &&
     password &&
     passwordConfirm &&
@@ -63,11 +63,11 @@ function SignUp() {
         <Box>
           <TextField
             type="text"
-            id="userId"
+            id="loginId"
             label="아이디"
             required
-            value={userId}
-            onChange={(event) => setUserId(event.target.value)}
+            value={loginId}
+            onChange={(event) => setLoginId(event.target.value)}
             sx={loginboxFieldsxProp}
           />
         </Box>

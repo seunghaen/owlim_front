@@ -9,11 +9,11 @@ type hocProp = {
 };
 
 export function IsLoggedin(props: hocProp) {
-  const { email } = useSelector((state: RootState) => state.user);
-  return email ? props.component : <Navigate to="/" />;
+  const { loginId } = useSelector((state: RootState) => state.user);
+  return loginId ? props.component : <Navigate to="/" />;
 }
 
 export function IsNotLoggedin(props: hocProp) {
-  const { email } = useSelector((state: RootState) => state.user);
-  return email ? <Navigate to="/main" /> : props.component;
+  const { loginId } = useSelector((state: RootState) => state.user);
+  return loginId ? <Navigate to="/main" /> : props.component;
 }

@@ -2,48 +2,59 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../api";
+import userSlice from "../../slices/user";
+import { useAppDispatch } from "../../store";
 import { loginboxFieldsxProp } from "../Signup/style";
 
 function LoginForm() {
-  const [userId, setUserId] = useState("");
+  const dispatch = useAppDispatch();
+  const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
   const passwordRegEx = /^[A-Za-z0-9]{8,20}$/;
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
+    event
+  ) => {
     event.preventDefault();
     if (password.length < 8 || !password.match(passwordRegEx) === null) {
       setPasswordError("비밀번호 규칙을 확인하세요.");
     } else {
       setPasswordError("");
       const form = {
-        loginId: userId,
+        loginId: loginId,
         password,
       };
-      login(form).then((res) => {
-        if (res.data.code === 200) {
-          navigate("/");
-        }
-      });
+      try {
+        const res = await login(form);
+        console.log(res);
+        dispatch(
+          userSlice.actions.login({
+            nick: res.data.nick,
+            loginId: res.data.loginId,
+            provider: res.data.provider,
+          })
+        );
+      } catch (error) {}
     }
   };
 
-  const isSubmitDisabled = !(userId && password && !passwordError);
+  const isSubmitDisabled = !(loginId && password && !passwordError);
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
       <Box>
         <TextField
           type="text"
-          id="userId"
+          id="loginId"
           label="아이디"
           required
           color="secondary"
-          value={userId}
+          value={loginId}
           sx={loginboxFieldsxProp}
-          onChange={(event) => setUserId(event.target.value)}
+          onChange={(event) => setLoginId(event.target.value)}
         />
       </Box>
       <Box>

@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface UserState {
   nick: string | null;
-  email: string | null;
+  loginId: string | null;
   provider: string | null;
 }
 const initialState: UserState = {
   nick: null,
-  email: null,
+  loginId: null,
   provider: null,
 };
 const userSlice = createSlice({
@@ -16,7 +16,7 @@ const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.nick = action.payload.nick;
-      state.email = action.payload.email;
+      state.loginId = action.payload.loginId;
       state.provider = action.payload.provider;
     },
     logout: (state) => {
