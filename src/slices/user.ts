@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginPost, refreshToken } from "../api/auth";
+import { loginPost, logout, refreshToken } from "../api/auth";
 
 interface UserState {
   nick: string | null;
@@ -17,11 +17,7 @@ const initialState: UserState = {
 const userSlice = createSlice({
   name: "user",
   initialState: initialState,
-  reducers: {
-    logout: (state) => {
-      state = initialState;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loginPost.pending, (state) => {
       state.loading = "pending";
@@ -45,6 +41,18 @@ const userSlice = createSlice({
       state.loading = "fulfilled";
     });
     builder.addCase(refreshToken.rejected, (state) => {
+      state.loading = "rejected";
+    });
+    builder.addCase(logout.pending, (state) => {
+      state.loading = "pending";
+    });
+    builder.addCase(logout.fulfilled, (state) => {
+      state.nick = null;
+      state.loginId = null;
+      state.provider = null;
+      state.loading = "fulfilled";
+    });
+    builder.addCase(logout.rejected, (state) => {
       state.loading = "rejected";
     });
   },

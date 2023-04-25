@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Cookies } from "react-cookie";
-import { setCookie } from "../utils/cookies";
+import { removeCookie, setCookie } from "../utils/cookies";
 const url = "http://localhost:8001";
 
 // account routes
@@ -42,7 +42,12 @@ export const refreshToken = createAsyncThunk("user/refresh", async () => {
 
 //todo loginPost랑 refreshToken 관련 액션 하나로 합치기
 
-export const logout = () => axios.get(`${url}/auth/logout`);
+export const logout = createAsyncThunk("user/logout", async () => {
+  const res = await axios.get(`${url}/auth/logout`);
+  console.log(res);
+  removeCookie("refreshToken");
+  return;
+});
 
 //
 export const sample = () => {

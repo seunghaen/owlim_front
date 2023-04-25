@@ -7,7 +7,9 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../api/auth";
+import { useAppDispatch } from "../../store";
 type SettingType = {
   name: string | null;
   onClickHandler: () => void;
@@ -15,6 +17,8 @@ type SettingType = {
 
 function ProfileMenu() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const settings: SettingType[] = [
     {
       name: "프로필",
@@ -25,7 +29,8 @@ function ProfileMenu() {
     {
       name: "로그아웃",
       onClickHandler: () => {
-        logout();
+        dispatch(logout());
+        navigate("/");
       },
     },
   ];
