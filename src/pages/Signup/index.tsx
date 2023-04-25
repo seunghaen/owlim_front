@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { join } from "../../api";
+import { join } from "../../api/auth";
 import LandingPageGrid from "../../UI/LandingPageGrid";
 import { loginboxFieldsxProp } from "./style";
 
@@ -30,6 +30,7 @@ function SignUp() {
       };
       console.log(form);
       join(form).then((res) => {
+        console.log(res.data);
         if (res.data.code === 200) {
           navigate("/");
         }

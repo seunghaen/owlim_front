@@ -1,27 +1,23 @@
 import { ThemeProvider } from "@mui/material";
-import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import theme from "./theme";
-import store, { useAppDispatch } from "./store";
+import { useAppDispatch } from "./store";
 import { useEffect } from "react";
-import axios from "axios";
-import userSlice from "./slices/user";
+import { useSelector } from "react-redux";
+import { RootState } from "./store/reducer";
+import { refreshToken } from "./api/auth";
+import { getCookie } from "./utils/cookies";
 
 function App() {
-  // const dispatch = useAppDispatch();
-  // const getUser = async () => {
-  //   try {
-  //     const url = `/auth/login/success`;
-  //     const { data } = await axios.get(url, { withCredentials: true });
-  //     dispatch(userSlice.actions.login(data.user));
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const dispatch = useAppDispatch();
+  const loginId = useSelector((state: RootState) => state.user.loginId);
   // useEffect(() => {
-  //   getUser();
+  //   if (!loginId) {
+  //     dispatch(refreshToken());
+  //   }
   // }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />

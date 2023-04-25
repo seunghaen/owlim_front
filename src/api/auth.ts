@@ -1,38 +1,40 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { Cookies } from "react-cookie";
+import { setCookie } from "../utils/cookies";
 const url = "http://localhost:8001";
-const headers = (token: String) => ({
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  },
-});
 
 // account routes
-
 export const join = (form: {
   nick: String;
   password: String;
   loginId: String;
 }) => axios.post(`${url}/auth/join`, form);
-// export const login = (form) => axios.post(`${url}/auth/login`, form);
 
+const onLoginSuccess = (accessToken: String) => {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+};
 export const loginPost = createAsyncThunk(
   "user/login",
   async (form: { loginId: String; password: String }) => {
     const res = await axios.post(`${url}/auth/login`, form);
-    const data = {
-      nick: res.data.nick,
-      loginId: res.data.loginId,
-      provider: res.data.provider,
-    };
-    return data;
+    const { refreshToken, accessToken, nick, loginId, provider } = res.data;
+    onLoginSuccess(accessToken);
+    setCookie("refreshToken", refreshToken, { httponly: true });
+    return { nick, loginId, provider };
   }
 );
+
+export const refreshToken = createAsyncThunk("user/refresh", async () => {
+  const res = await axios.post(`${url}/auth/refreshToken`, {});
+  const { accessToken, nick, loginId, provider } = res.data;
+  onLoginSuccess(accessToken);
+  return { nick, loginId, provider };
+});
+
+//todo loginPost랑 refreshToken 관련 액션 하나로 합치기
+
 export const logout = () => axios.get(`${url}/auth/logout`);
-export const getUser = (token: String) =>
-  axios.get(`${url}/auth`, headers(token));
 
 //
 export const sample = () => {

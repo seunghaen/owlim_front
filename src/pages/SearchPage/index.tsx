@@ -1,11 +1,10 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../store";
 import { RootState } from "../../store/reducer";
 import PageGrid from "../../UI/PageGrid";
 import searchSlice from "../../slices/search";
 import React, { useEffect, useState } from "react";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 function SearchPage() {
   const dispatch = useAppDispatch();

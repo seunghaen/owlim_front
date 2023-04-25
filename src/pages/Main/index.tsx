@@ -38,11 +38,22 @@ function Main() {
         )
       )}
       <button
-        onClick={() => {
-          axios.get("/sample");
+        onClick={async () => {
+          const res = await axios.post(
+            `http://localhost:8001/auth/refreshToken`,
+            {}
+          );
+          console.log(res);
         }}
       >
         test
+      </button>
+      <button
+        onClick={() => {
+          axios.get("http://localhost:8001/sample");
+        }}
+      >
+        다른 테스트
       </button>
     </PageGrid>
   );
