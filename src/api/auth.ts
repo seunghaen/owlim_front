@@ -26,10 +26,18 @@ export const loginPost = createAsyncThunk(
 );
 
 export const refreshToken = createAsyncThunk("user/refresh", async () => {
-  const res = await axios.post(`${url}/auth/refreshToken`, {});
-  const { accessToken, nick, loginId, provider } = res.data;
-  onLoginSuccess(accessToken);
-  return { nick, loginId, provider };
+  try {
+    const res = await axios.post(
+      `${url}/auth/refreshToken`,
+      {},
+      { withCredentials: true }
+    );
+    const { accessToken, nick, loginId, provider } = res.data;
+    onLoginSuccess(accessToken);
+    return { nick, loginId, provider };
+  } catch (error) {
+    return { nick: null, loginId: null, provider: null };
+  }
 });
 
 //todo loginPost랑 refreshToken 관련 액션 하나로 합치기

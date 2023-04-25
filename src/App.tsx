@@ -7,16 +7,15 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/reducer";
 import { refreshToken } from "./api/auth";
-import { getCookie } from "./utils/cookies";
 
 function App() {
   const dispatch = useAppDispatch();
   const loginId = useSelector((state: RootState) => state.user.loginId);
-  // useEffect(() => {
-  //   if (!loginId) {
-  //     dispatch(refreshToken());
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!loginId) {
+      dispatch(refreshToken());
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

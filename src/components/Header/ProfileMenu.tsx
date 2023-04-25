@@ -7,10 +7,28 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { logout } from "../../api/auth";
+type SettingType = {
+  name: string | null;
+  onClickHandler: () => void;
+};
 
 function ProfileMenu() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings: SettingType[] = [
+    {
+      name: "프로필",
+      onClickHandler: () => {
+        setAnchorElUser(null);
+      },
+    },
+    {
+      name: "로그아웃",
+      onClickHandler: () => {
+        logout();
+      },
+    },
+  ];
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -41,8 +59,8 @@ function ProfileMenu() {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
+          <MenuItem key={setting.name} onClick={setting.onClickHandler}>
+            <Typography textAlign="center">{setting.name}</Typography>
           </MenuItem>
         ))}
       </Menu>

@@ -4,8 +4,11 @@ import PageGrid from "../../UI/PageGrid";
 import letterList, { LetterType } from "./letterList";
 import LetterCard from "../../UI/LetterCard";
 import axios from "axios";
+import { useAppDispatch } from "../../store";
+import { refreshToken } from "../../api/auth";
 
 function Main() {
+  const dispatch = useAppDispatch();
   const [value, setValue] = useState<LetterType["type"]>(null);
   const handleChange = (
     event: React.SyntheticEvent,
@@ -39,11 +42,7 @@ function Main() {
       )}
       <button
         onClick={async () => {
-          const res = await axios.post(
-            `http://localhost:8001/auth/refreshToken`,
-            {}
-          );
-          console.log(res);
+          dispatch(refreshToken());
         }}
       >
         test

@@ -28,9 +28,7 @@ function SignUp() {
         password,
         loginId: loginId,
       };
-      console.log(form);
       join(form).then((res) => {
-        console.log(res.data);
         if (res.data.code === 200) {
           navigate("/");
         }
