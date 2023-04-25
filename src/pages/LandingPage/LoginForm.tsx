@@ -1,8 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api";
-import userSlice from "../../slices/user";
+import { loginPost } from "../../api/auth";
 import { useAppDispatch } from "../../store";
 import { loginboxFieldsxProp } from "../Signup/style";
 
@@ -28,15 +27,7 @@ function LoginForm() {
         password,
       };
       try {
-        const res = await login(form);
-        console.log(res);
-        dispatch(
-          userSlice.actions.login({
-            nick: res.data.nick,
-            loginId: res.data.loginId,
-            provider: res.data.provider,
-          })
-        );
+        dispatch(loginPost(form));
       } catch (error) {}
     }
   };

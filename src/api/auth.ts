@@ -1,0 +1,44 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+const url = "http://localhost:8001";
+const headers = (token: String) => ({
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + token,
+  },
+});
+
+// account routes
+
+export const join = (form: {
+  nick: String;
+  password: String;
+  loginId: String;
+}) => axios.post(`${url}/auth/join`, form);
+// export const login = (form) => axios.post(`${url}/auth/login`, form);
+
+export const loginPost = createAsyncThunk(
+  "user/login",
+  async (form: { loginId: String; password: String }) => {
+    const res = await axios.post(`${url}/auth/login`, form);
+    const data = {
+      nick: res.data.nick,
+      loginId: res.data.loginId,
+      provider: res.data.provider,
+    };
+    return data;
+  }
+);
+export const logout = () => axios.get(`${url}/auth/logout`);
+export const getUser = (token: String) =>
+  axios.get(`${url}/auth`, headers(token));
+
+//
+export const sample = () => {
+  axios.get(`/sample`);
+};
+
+export const googleLogin = () => {
+  axios.get(`/auth/google`);
+};
