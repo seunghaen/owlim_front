@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import BaseModal from "../modals/BaseModal";
+import Admin from "../pages/Admin";
 import Main from "../pages/Main";
 import SearchPage from "../pages/SearchPage";
 import Setting from "../pages/Setting";
@@ -38,6 +39,10 @@ const mainRoute = {
     {
       path: "search",
       element: <SearchPage />,
+    },
+    {
+      path: "admin",
+      element: <Admin />,
     },
   ],
 };

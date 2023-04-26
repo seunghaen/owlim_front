@@ -14,6 +14,10 @@ const listItems: SidebarMenuItem[] = [
     listText: "설정",
     path: "/main/setting",
   },
+  {
+    listText: "관리자",
+    path: "/main/admin",
+  },
 ];
 function Sidebar() {
   return (
