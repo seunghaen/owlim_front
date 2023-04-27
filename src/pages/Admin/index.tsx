@@ -1,11 +1,15 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { imgUpload } from "../../api/admin";
+import { imgUpload, uploadLetter } from "../../api/admin";
 import LandingPageGrid from "../../UI/LandingPageGrid";
 import { adminformSxProp, adminImgSxProp } from "./style";
 
 function Admin() {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
+  const [name, setName] = useState<string | null>(null);
+  const [desc, setDesc] = useState<string | null>(null);
+  const [type, setType] = useState<string | null>(null);
+  const [address, setAddress] = useState<string | null>(null);
   const imgUploadHandler: React.ChangeEventHandler<HTMLInputElement> = async (
     event
   ) => {
@@ -19,7 +23,17 @@ function Admin() {
   };
   const letterSubmitHandler: React.FormEventHandler = async (event) => {
     event.preventDefault();
-    const formDate = new FormData();
+    console.log("daf");
+    const formData = new FormData();
+    if (name && desc && type && address && imgSrc) {
+      formData.append("url", imgSrc);
+      formData.append("type", type);
+      formData.append("desc", desc);
+      formData.append("address", address);
+      formData.append("name", name);
+      const res = await uploadLetter(formData);
+      console.log(res);
+    }
   };
   return (
     <LandingPageGrid>
@@ -35,6 +49,10 @@ function Admin() {
             id="name"
             label="name"
             color="secondary"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
             fullWidth
           />
         </Box>
@@ -47,6 +65,10 @@ function Admin() {
             multiline={true}
             minRows={3}
             fullWidth
+            value={desc}
+            onChange={(e) => {
+              setDesc(e.target.value);
+            }}
           />
         </Box>
         <Box>
@@ -56,6 +78,10 @@ function Admin() {
             label="type"
             color="secondary"
             fullWidth
+            value={type}
+            onChange={(e) => {
+              setType(e.target.value);
+            }}
           />
         </Box>
         <Box>
@@ -65,6 +91,10 @@ function Admin() {
             label="보내주는 주소"
             color="secondary"
             fullWidth
+            value={address}
+            onChange={(e) => {
+              setAddress(e.target.value);
+            }}
           />
         </Box>
         <Button color="secondary" type="submit">

@@ -8,3 +8,11 @@ export const imgUpload = (target: FormData) => {
     },
   });
 };
+
+export const uploadLetter = (target: FormData) => {
+  return axios.post(`${url}/letter/upload`, target, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};

@@ -1,14 +1,18 @@
 import { Box, Tab, Tabs } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageGrid from "../../UI/PageGrid";
-import letterList, { LetterType } from "./letterList";
 import LetterCard from "../../UI/LetterCard";
 import axios from "axios";
+import { LetterType } from "../../slices/letter";
 import { useAppDispatch } from "../../store";
 import { refreshToken } from "../../api/auth";
+import { getLetter } from "../../api/letter";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/reducer";
 
 function Main() {
   const dispatch = useAppDispatch();
+  const [curLetterList, setCurLetterList] = useState<LetterType[] | null>(null);
   const [value, setValue] = useState<LetterType["type"]>(null);
   const handleChange = (
     event: React.SyntheticEvent,
@@ -16,6 +20,15 @@ function Main() {
   ) => {
     setValue(newValue);
   };
+  const letterList = useSelector((state: RootState) => state.letter.letterList);
+  useEffect(() => {
+    if (letterList.length === 0) {
+      dispatch(getLetter());
+    }
+  }, [dispatch]);
+  useEffect(() => {
+    setCurLetterList(letterList);
+  }, [letterList]);
   return (
     <PageGrid>
       <Box bgcolor="white" sx={{ width: "90%", my: "20px" }}>
@@ -33,13 +46,14 @@ function Main() {
           <Tab value="취미" label="취미" />
         </Tabs>
       </Box>
-      {letterList.map((item, index) =>
-        value ? (
-          item.type === value && <LetterCard item={item} key={index} />
-        ) : (
-          <LetterCard item={item} key={index} />
-        )
-      )}
+      {curLetterList &&
+        curLetterList.map((item, index) =>
+          value ? (
+            item.type === value && <LetterCard item={item} key={index} />
+          ) : (
+            <LetterCard item={item} key={index} />
+          )
+        )}
       <button
         onClick={async () => {
           dispatch(refreshToken());
@@ -48,8 +62,10 @@ function Main() {
         test
       </button>
       <button
-        onClick={() => {
-          axios.get("http://localhost:8001/sample");
+        onClick={async () => {
+          const res = await axios.get("http://localhost:8001/letter/get");
+          console.log(res.data.letters);
+          dispatch(getLetter());
         }}
       >
         다른 테스트

@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { LetterType } from "../pages/Main/letterList";
+import { LetterType } from "../slices/letter";
 
 type CardProp = {
   item: LetterType;
@@ -18,16 +18,24 @@ export default function LetterCard({ item }: CardProp) {
         maxWidth: 250,
         minWidth: 250,
         margin: "15px",
-        borderColor: "black",
       }}
     >
-      <CardMedia sx={{ height: 100 }} image={item.img} title={item.title} />
+      <CardMedia
+        sx={{
+          height: 150,
+          margin: "5px",
+          border: 2,
+          borderColor: "primary.main",
+        }}
+        image={item.imgUrl}
+        title={item.name}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {item.title}
+          {item.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {item.sub}
+          {item.desc}
         </Typography>
       </CardContent>
       <CardActions>
