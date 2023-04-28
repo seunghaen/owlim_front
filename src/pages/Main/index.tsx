@@ -54,7 +54,7 @@ function Main() {
             <LetterCard item={item} key={index} />
           )
         )}
-      <button
+      {/* <button
         onClick={async () => {
           dispatch(refreshToken());
         }}
@@ -69,7 +69,7 @@ function Main() {
         }}
       >
         다른 테스트
-      </button>
+      </button> */}
     </PageGrid>
   );
 }

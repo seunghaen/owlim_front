@@ -22,10 +22,11 @@ export default function LetterCard({ item }: CardProp) {
     >
       <CardMedia
         sx={{
-          height: 150,
+          height: "150px",
           margin: "5px",
           border: 2,
           borderColor: "primary.main",
+          objectFit: "contain",
         }}
         image={item.imgUrl}
         title={item.name}
@@ -34,7 +35,11 @@ export default function LetterCard({ item }: CardProp) {
         <Typography gutterBottom variant="h5" component="div">
           {item.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ height: "42px" }}
+        >
           {item.desc}
         </Typography>
       </CardContent>
