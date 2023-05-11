@@ -1,10 +1,40 @@
-import React from "react";
+import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getMail } from "../../api/mail";
+import { MailState } from "../../slices/mail";
+import { useAppDispatch } from "../../store";
+import { RootState } from "../../store/reducer";
 import PageGrid from "../../UI/PageGrid";
 
 function Subscribe() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [curMailList, setCurMailList] = useState<MailState[] | null>(null);
+  useEffect(() => {
+    dispatch(getMail());
+  }, [dispatch]);
+  const mailList = useSelector((state: RootState) => state.mail.mailList);
+  useEffect(() => {
+    setCurMailList(mailList);
+  }, [mailList]);
+  console.log(curMailList);
+  const mailClickHandler = (id: string) => {
+    navigate(`/main/subscribe/${id}`);
+  };
   return (
     <PageGrid>
-      <div>Subscribe</div>
+      <List>
+        {curMailList &&
+          curMailList.map((mail) => (
+            <ListItem>
+              <ListItemButton onClick={() => mailClickHandler(mail.id)}>
+                <ListItemText primary={mail.title} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+      </List>
     </PageGrid>
   );
 }

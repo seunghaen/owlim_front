@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Cookies } from "react-cookie";
 import { removeCookie, setCookie } from "../utils/cookies";
 const url = "http://localhost:8001";
 
@@ -12,7 +11,7 @@ export const join = (form: {
 }) => axios.post(`${url}/auth/join`, form);
 
 const onLoginSuccess = (accessToken: String) => {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+  axios.defaults.headers.common["Authorization"] = `bearer ${accessToken}`;
 };
 export const loginPost = createAsyncThunk(
   "user/login",

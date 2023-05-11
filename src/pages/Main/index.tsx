@@ -60,16 +60,15 @@ function Main() {
         }}
       >
         test
-      </button>
+      </button> */}
       <button
         onClick={async () => {
-          const res = await axios.get("http://localhost:8001/letter/get");
-          console.log(res.data.letters);
-          dispatch(getLetter());
+          const res = await axios.get("http://localhost:8001/email/get");
+          console.log(res.data);
         }}
       >
         다른 테스트
-      </button> */}
+      </button>
     </PageGrid>
   );
 }
