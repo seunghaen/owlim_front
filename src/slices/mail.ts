@@ -3,9 +3,9 @@ import { getMail } from "../api/mail";
 
 export type MailState = {
   title: string;
-  createAt: string;
   id: string;
-  from: string;
+  letterName: string;
+  createdDate: number[];
 };
 
 interface mailState {

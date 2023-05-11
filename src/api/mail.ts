@@ -9,7 +9,7 @@ export const getMail = createAsyncThunk("mail/get", async () => {
     const res = await axios.get(`${url}/email/get`);
     let mailList: MailState[] = [];
     console.log(res.data);
-    res.data.mails.map((element: MailState) => {
+    res.data.mailList.map((element: MailState) => {
       mailList.push(element);
     });
     return mailList;
