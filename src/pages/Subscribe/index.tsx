@@ -7,6 +7,7 @@ import { MailState } from "../../slices/mail";
 import { useAppDispatch } from "../../store";
 import { RootState } from "../../store/reducer";
 import PageGrid from "../../UI/PageGrid";
+import MailListItem from "./MailListItem";
 
 function Subscribe() {
   const dispatch = useAppDispatch();
@@ -20,20 +21,11 @@ function Subscribe() {
     setCurMailList(mailList);
   }, [mailList]);
   console.log(curMailList);
-  const mailClickHandler = (id: string) => {
-    navigate(`/main/subscribe/${id}`);
-  };
+
   return (
     <PageGrid>
       <List>
-        {curMailList &&
-          curMailList.map((mail) => (
-            <ListItem>
-              <ListItemButton onClick={() => mailClickHandler(mail.id)}>
-                <ListItemText primary={mail.title} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+        {curMailList && curMailList.map((mail) => <MailListItem mail={mail} />)}
       </List>
     </PageGrid>
   );
