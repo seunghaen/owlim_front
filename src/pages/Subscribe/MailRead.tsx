@@ -18,9 +18,14 @@ function MailRead() {
     }
     fetchMail();
   });
+  console.log(curMailHtml);
   return (
     <PageGrid>
-      <div>{`${param.id}`}</div>
+      {curMailHtml ? (
+        <div dangerouslySetInnerHTML={{ __html: curMailHtml }}></div>
+      ) : (
+        <div>가져올 것 없음</div>
+      )}
     </PageGrid>
   );
 }

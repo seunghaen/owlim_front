@@ -63,7 +63,7 @@ function Main() {
       </button> */}
       <button
         onClick={async () => {
-          const res = await axios.get("http://localhost:8001/email/get");
+          const res = await axios.get("http://localhost:8001/email/read/1");
           console.log(res.data);
         }}
       >
