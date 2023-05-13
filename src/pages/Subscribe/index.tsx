@@ -11,7 +11,6 @@ import MailListItem from "./MailListItem";
 
 function Subscribe() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const [curMailList, setCurMailList] = useState<MailState[] | null>(null);
   useEffect(() => {
     dispatch(getMail());
@@ -24,7 +23,7 @@ function Subscribe() {
 
   return (
     <PageGrid>
-      <List>
+      <List sx={{ width: "100%" }}>
         {curMailList && curMailList.map((mail) => <MailListItem mail={mail} />)}
       </List>
     </PageGrid>

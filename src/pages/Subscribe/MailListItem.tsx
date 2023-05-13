@@ -1,4 +1,10 @@
-import { ListItem, ListItemButton, ListItemText } from "@mui/material";
+import {
+  Divider,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import mail, { MailState } from "../../slices/mail";
@@ -11,11 +17,17 @@ function MailListItem(props: MailListItemProp) {
     navigate(`/main/subscribe/${id}`);
   };
   return (
-    <ListItem>
-      <ListItemButton onClick={() => mailClickHandler(props.mail.id)}>
-        <ListItemText primary={props.mail.title} />
-      </ListItemButton>
-    </ListItem>
+    <>
+      <ListItem sx={{ width: "100%" }}>
+        <ListItemButton onClick={() => mailClickHandler(props.mail.id)}>
+          <Typography>{props.mail.letterName}</Typography>
+          <Typography sx={{ fontSize: "0.8rem" }}>
+            {props.mail.title}
+          </Typography>
+        </ListItemButton>
+      </ListItem>
+      <Divider />
+    </>
   );
 }
 
