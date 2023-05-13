@@ -4,6 +4,8 @@ import { getMail } from "../api/mail";
 export type MailState = {
   title: string;
   id: string;
+  sender: string;
+  address: string;
   letterName: string;
   createdDate: number[];
 };

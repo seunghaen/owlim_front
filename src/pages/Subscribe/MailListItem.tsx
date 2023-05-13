@@ -20,7 +20,7 @@ function MailListItem(props: MailListItemProp) {
     <>
       <ListItem sx={{ width: "100%" }}>
         <ListItemButton onClick={() => mailClickHandler(props.mail.id)}>
-          <Typography>{props.mail.letterName}</Typography>
+          <Typography>{props.mail.sender}</Typography>
           <Typography sx={{ fontSize: "0.8rem" }}>
             {props.mail.title}
           </Typography>
