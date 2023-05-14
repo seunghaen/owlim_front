@@ -1,13 +1,19 @@
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { getMail } from "../../api/mail";
 import { MailState } from "../../slices/mail";
 import { useAppDispatch } from "../../store";
 import { RootState } from "../../store/reducer";
 import PageGrid from "../../UI/PageGrid";
-import MailListItem from "./MailListItem";
+import MailTableRow from "./MailTableRow";
+import MailListItem from "./MailTableRow";
 
 function Subscribe() {
   const dispatch = useAppDispatch();
@@ -23,9 +29,20 @@ function Subscribe() {
 
   return (
     <PageGrid>
-      <List sx={{ width: "100%" }}>
-        {curMailList && curMailList.map((mail) => <MailListItem mail={mail} />)}
-      </List>
+      <Table sx={{ minWidth: 650, marginX: "30px" }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>보낸사람</TableCell>
+            <TableCell align="right">읽음</TableCell>
+            <TableCell align="right">제목</TableCell>
+            <TableCell align="right">날짜</TableCell>
+            <TableCell align="right">삭제</TableCell>
+          </TableRow>
+        </TableHead>
+      </Table>
+      <TableBody sx={{ width: "100%" }}>
+        {curMailList && curMailList.map((mail) => <MailTableRow mail={mail} />)}
+      </TableBody>
     </PageGrid>
   );
 }
