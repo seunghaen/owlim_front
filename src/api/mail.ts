@@ -22,3 +22,7 @@ export const getMail = createAsyncThunk("mail/get", async () => {
 export const getMailHtml = (id: string) => {
   return axios.get(`${url}/email/read/${id}`);
 };
+
+export const changemailread = (id: string) => {
+  return axios.get(`${url}/email/changeread/${id}`);
+};

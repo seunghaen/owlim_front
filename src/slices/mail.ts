@@ -7,6 +7,7 @@ export type MailState = {
   sender: string;
   address: string;
   letterName: string;
+  isRead: boolean;
   createdDate: number[];
 };
 
